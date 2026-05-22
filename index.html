@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJ Rossi Wine | Official Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A017;
+    --gold-light: #F0C040;
+    --gold-bright: #FFD700;
+    --gold-dark: #8B6914;
+    --black: #080808;
+    --black-2: #0f0f0f;
+    --black-3: #141414;
+    --black-4: #1a1a1a;
+    --black-5: #222222;
+    --text-light: #f5f0e8;
+    --text-muted: #a89878;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--text-light); font-family: 'Raleway', sans-serif; overflow-x: hidden; }
+
+  /* ─── PARTICLE BG ─── */
+  #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
+    animation: float linear infinite; opacity: 0;
+  }
+  @keyframes float {
+    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.2; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: linear-gradient(180deg, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.85) 100%);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,160,23,0.2);
+    padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
+    height: 72px; transition: all 0.3s ease;
+  }
+  nav.scrolled { height: 60px; background: rgba(8,8,8,0.98); }
+
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo img { height: 44px; width: 44px; border-radius: 50%; border: 1.5px solid var(--gold); object-fit: cover; }
+  .nav-logo-text {
+    font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-bright), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-transform: uppercase; line-height: 1.2;
+  }
+  .nav-logo-sub { font-size: 9px; letter-spacing: 5px; opacity: 0.8; display: block; }
+
+  .nav-links { display: flex; gap: 8px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-muted); font-family: 'Cinzel', serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;
+    padding: 8px 14px; border-radius: 2px; transition: all 0.3s ease; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 2px; left: 50%; right: 50%;
+    height: 1px; background: var(--gold-bright); transition: all 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--gold-bright); }
+  .nav-links a:hover::after { left: 14px; right: 14px; }
+
+  .nav-book {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: var(--black) !important; font-family: 'Cinzel', serif; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
+    padding: 10px 20px !important; border-radius: 2px; text-decoration: none;
+    transition: all 0.3s ease; border: none;
+  }
+  .nav-book:hover { background: linear-gradient(135deg, var(--gold), var(--gold-bright)) !important; transform: translateY(-1px); }
+  .nav-book::after { display: none !important; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+  .hamburger span { width: 24px; height: 1.5px; background: var(--gold); display: block; transition: all 0.3s; }
+
+  /* ─── HERO ─── */
+  #home {
+    min-height: 100vh; position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 100px 5% 60px; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(212,160,23,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(212,160,23,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(212,160,23,0.04) 0%, transparent 60%);
+  }
+  .hero-ring {
+    position: absolute; border-radius: 50%; border: 1px solid rgba(212,160,23,0.12);
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+  .hero-ring:nth-child(1) { width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 0s; }
+  .hero-ring:nth-child(2) { width: 800px; height: 800px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 1s; border-color: rgba(212,160,23,0.07); }
+  .hero-ring:nth-child(3) { width: 1000px; height: 1000px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 2s; border-color: rgba(212,160,23,0.04); }
+  @keyframes pulse-ring { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 1; } 50% { transform: translate(-50%,-50%) scale(1.03); opacity: 0.6; } }
+
+  .hero-logo-wrap { position: relative; display: inline-block; margin-bottom: 32px; animation: hero-drop 1.2s cubic-bezier(0.16,1,0.3,1) both; }
+  @keyframes hero-drop { from { opacity: 0; transform: translateY(-40px) scale(0.9); } to { opacity: 1; transform: none; } }
+
+  .hero-logo {
+    width: 160px; height: 160px; border-radius: 50%; border: 2px solid var(--gold);
+    box-shadow: 0 0 40px rgba(212,160,23,0.3), 0 0 80px rgba(212,160,23,0.1);
+    object-fit: cover; animation: spin-glow 8s ease-in-out infinite;
+  }
+  @keyframes spin-glow {
+    0%,100% { box-shadow: 0 0 40px rgba(212,160,23,0.3), 0 0 80px rgba(212,160,23,0.1); }
+    50%      { box-shadow: 0 0 60px rgba(212,160,23,0.5), 0 0 120px rgba(212,160,23,0.2); }
+  }
+  .hero-badge {
+    position: absolute; bottom: 4px; right: 4px;
+    background: var(--gold); color: var(--black);
+    font-family: 'Cinzel', serif; font-size: 7px; font-weight: 700;
+    letter-spacing: 2px; padding: 4px 8px; border-radius: 10px; text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 900; line-height: 0.95; margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-bright) 40%, var(--gold) 70%, var(--gold-dark) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    animation: title-rise 1.4s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+    filter: drop-shadow(0 4px 20px rgba(212,160,23,0.4));
+  }
+  .hero-title span { display: block; }
+  .hero-title .wine { font-size: 0.65em; letter-spacing: 8px; text-transform: uppercase; }
+  @keyframes title-rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+
+  .hero-tagline {
+    font-size: 12px; letter-spacing: 8px; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 500; margin-bottom: 40px;
+    animation: title-rise 1.4s cubic-bezier(0.16,1,0.3,1) 0.4s both;
+  }
+  .hero-divider {
+    width: 120px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 40px; animation: title-rise 1.4s 0.6s both;
+  }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; animation: title-rise 1.4s 0.8s both; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+    color: var(--black); font-family: 'Cinzel', serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    text-decoration: none; padding: 16px 36px; border-radius: 1px;
+    transition: all 0.3s ease; border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,160,23,0.4); }
+
+  .btn-outline {
+    background: transparent; border: 1px solid var(--gold); color: var(--gold);
+    font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase; text-decoration: none;
+    padding: 15px 36px; border-radius: 1px; transition: all 0.3s ease; cursor: pointer;
+  }
+  .btn-outline:hover { background: rgba(212,160,23,0.1); transform: translateY(-2px); }
+
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--text-muted); font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(180deg, var(--gold), transparent); }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+  /* ─── SECTION COMMONS ─── */
+  section { position: relative; z-index: 1; }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-label { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); font-weight: 600; display: block; margin-bottom: 12px; }
+  .section-title {
+    font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-bright), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px;
+  }
+  .section-rule { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto; }
+
+  /* ─── MIXES SECTION ─── */
+  #mixes { padding: 100px 5%; background: var(--black-2); }
+
+  .mixes-tabs {
+    display: flex; justify-content: center; gap: 0; margin-bottom: 48px;
+    border: 1px solid rgba(212,160,23,0.2); border-radius: 2px;
+    width: fit-content; margin-left: auto; margin-right: auto;
+  }
+  .mix-tab {
+    font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    padding: 14px 36px; cursor: pointer;
+    background: transparent; color: var(--text-muted); border: none; transition: all 0.3s ease;
+  }
+  .mix-tab.active { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: var(--black); }
+
+  /* ── VIDEO GRID (pure HTML embed) ── */
+  .video-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px; margin-bottom: 40px; max-width: 1200px; margin-left: auto; margin-right: auto;
+  }
+
+  .video-card {
+    background: var(--black-3); border: 1px solid rgba(212,160,23,0.15);
+    border-radius: 4px; overflow: hidden; transition: all 0.3s ease;
+  }
+  .video-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(212,160,23,0.15); }
+
+  /* Thumbnail / click-to-play wrapper */
+  .video-thumb {
+    position: relative; padding-top: 56.25%; background: var(--black-4); overflow: hidden; cursor: pointer;
+  }
+  .video-thumb img.thumb-img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .video-card:hover .thumb-img { transform: scale(1.04); }
+
+  /* Play button overlay on thumbnail */
+  .thumb-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.75) 100%);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s ease;
+  }
+  .video-card:hover .thumb-overlay { background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%); }
+
+  .play-circle {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(212,160,23,0.92);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(212,160,23,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .video-card:hover .play-circle { transform: scale(1.12); box-shadow: 0 8px 32px rgba(212,160,23,0.7); }
+  .play-circle svg { width: 24px; height: 24px; fill: var(--black); margin-left: 4px; }
+
+  /* Actual iframe — hidden until click */
+  .video-iframe-wrap {
+    position: absolute; inset: 0; display: none;
+  }
+  .video-iframe-wrap iframe {
+    width: 100%; height: 100%; border: none;
+  }
+
+  .video-info { padding: 16px 20px 20px; }
+  .video-title {
+    font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600;
+    color: var(--text-light); margin-bottom: 6px; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .video-meta { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
+
+  /* ── AUDIO GRID (hearthis.at embeds) ── */
+  .audio-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; margin-bottom: 40px; max-width: 1200px; margin-left: auto; margin-right: auto;
+  }
+  .audio-card {
+    background: var(--black-3); border: 1px solid rgba(212,160,23,0.15);
+    border-radius: 4px; overflow: hidden; transition: all 0.3s ease;
+  }
+  .audio-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(212,160,23,0.12); }
+  .audio-card iframe { width: 100%; border: none; display: block; }
+
+  .more-btn-wrap { text-align: center; margin-top: 16px; }
+
+  /* ─── ABOUT ─── */
+  #about { padding: 100px 5%; background: var(--black); }
+  .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+
+  .about-art { position: relative; display: flex; align-items: center; justify-content: center; }
+  .about-logo-main {
+    width: 280px; height: 280px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold);
+    box-shadow: 0 0 60px rgba(212,160,23,0.25), 0 0 120px rgba(212,160,23,0.1); position: relative; z-index: 2;
+  }
+  .about-ring-1, .about-ring-2 { position: absolute; border-radius: 50%; border: 1px solid rgba(212,160,23,0.2); }
+  .about-ring-1 { width: 340px; height: 340px; animation: spin-slow 20s linear infinite; }
+  .about-ring-2 { width: 420px; height: 420px; animation: spin-slow 30s linear infinite reverse; border-style: dashed; border-color: rgba(212,160,23,0.1); }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .about-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); top: 0; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px var(--gold); }
+
+  .about-content { display: flex; flex-direction: column; gap: 24px; }
+  .about-name {
+    font-family: 'Cinzel Decorative', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-bright));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .about-bio { font-size: 15px; line-height: 1.9; color: var(--text-muted); font-weight: 300; }
+  .about-bio p + p { margin-top: 14px; }
+
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 24px;
+    background: var(--black-3); border: 1px solid rgba(212,160,23,0.15); border-radius: 2px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block;
+  }
+  .stat-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+
+  /* ─── GALLERY ─── */
+  #gallery { padding: 100px 5%; background: var(--black-2); }
+  .gallery-placeholder { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .gallery-ph-item {
+    border: 1px dashed rgba(212,160,23,0.3); border-radius: 2px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: rgba(212,160,23,0.4); font-family: 'Cinzel', serif;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    background: var(--black-3); cursor: default; overflow: hidden;
+  }
+  .gallery-ph-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-ph-item.tall { width: 100%; height: 100%; grid-row: span 2; min-height: 260px; }
+  .gallery-ph-item.short { min-height: 130px; }
+  .gallery-upload-note { text-align: center; margin-top: 32px; color: var(--text-muted); font-size: 13px; line-height: 1.8; }
+  .gallery-upload-note a { color: var(--gold); text-decoration: none; }
+
+  /* ─── CONTACT ─── */
+  #contact { padding: 100px 5%; background: var(--black); }
+  .contact-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .contact-info { display: flex; flex-direction: column; gap: 28px; }
+  .contact-block h4 { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; font-weight: 700; }
+  .contact-block p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+
+  .social-links { display: flex; flex-direction: column; gap: 12px; }
+  .social-link {
+    display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text-muted);
+    font-size: 13px; letter-spacing: 1px; padding: 12px 16px; background: var(--black-3);
+    border: 1px solid rgba(212,160,23,0.1); border-radius: 2px; transition: all 0.3s ease;
+  }
+  .social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,160,23,0.05); }
+  .social-icon { width: 20px; height: 20px; flex-shrink: 0; }
+
+  .booking-form { display: flex; flex-direction: column; gap: 16px; }
+  .booking-form h3 { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+  .form-group input, .form-group textarea, .form-group select {
+    background: var(--black-3); border: 1px solid rgba(212,160,23,0.2); border-radius: 2px;
+    padding: 12px 16px; color: var(--text-light); font-family: 'Raleway', sans-serif;
+    font-size: 14px; outline: none; transition: border-color 0.3s ease;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--black-3); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-submit { margin-top: 4px; }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--black-2); border-top: 1px solid rgba(212,160,23,0.15); padding: 48px 5% 28px; position: relative; z-index: 1; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+  .footer-brand img { height: 60px; width: 60px; border-radius: 50%; border: 1px solid var(--gold); object-fit: cover; margin-bottom: 16px; }
+  .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.8; max-width: 280px; }
+  .footer-brand h4 { font-family: 'Cinzel Decorative', serif; font-size: 16px; font-weight: 700; background: linear-gradient(135deg, var(--gold-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+  .footer-col h5 { font-family: 'Cinzel', serif; font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { text-decoration: none; color: var(--text-muted); font-size: 13px; transition: color 0.3s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+
+  .footer-socials { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+  .footer-social-btn {
+    width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(212,160,23,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); text-decoration: none; transition: all 0.3s ease;
+  }
+  .footer-social-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,160,23,0.1); }
+  .footer-social-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+  .footer-bottom { border-top: 1px solid rgba(212,160,23,0.1); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-copy { font-size: 12px; color: var(--text-muted); letter-spacing: 1px; }
+  .footer-made { font-size: 11px; color: rgba(212,160,23,0.4); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ─── MOBILE NAV ─── */
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; inset-inline: 0; z-index: 999;
+    background: rgba(8,8,8,0.98); backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(212,160,23,0.2); padding: 24px 5%; flex-direction: column; gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    text-decoration: none; color: var(--text-muted); font-family: 'Cinzel', serif;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;
+    padding: 14px 0; border-bottom: 1px solid rgba(212,160,23,0.08); transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .about-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+    .about-art { justify-content: center; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .gallery-placeholder { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: span 2; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .nav-book { display: none; }
+    .hamburger { display: flex; }
+    .video-grid { grid-template-columns: 1fr; }
+    .audio-grid { grid-template-columns: 1fr; }
+    .gallery-placeholder { grid-template-columns: 1fr 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .footer-brand { grid-column: span 1; }
+    .about-stats { grid-template-columns: 1fr; gap: 12px; }
+    .mixes-tabs { flex-direction: column; width: 100%; }
+  }
+  .nav-links a.active { color: var(--gold-bright); }
+  .nav-links a.active::after { left: 14px; right: 14px; }
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <img src="IMAGES/Screenshot_20260519-130945.png" alt="DJ Rossi Wine Logo" onerror="this.style.display='none'">
+    <div class="nav-logo-text">
+      DJ Rossi Wine
+      <span class="nav-logo-sub">Uganda's Finest</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#mixes">Mixes</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-book">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="toggleMenu()">Home</a>
+  <a href="#mixes" onclick="toggleMenu()">Mixes</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#contact" onclick="toggleMenu()">Contact &amp; Booking</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-logo-wrap">
+    <img class="hero-logo" src="IMAGES/Screenshot_20260519-130945.png" alt="DJ Rossi Wine"
+      onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'160\' height=\'160\'><circle cx=\'80\' cy=\'80\' r=\'79\' fill=\'%23141414\' stroke=\'%23D4A017\' stroke-width=\'2\'/><text x=\'50%25\' y=\'50%25\' font-family=\'serif\' font-size=\'28\' fill=\'%23D4A017\' text-anchor=\'middle\' dominant-baseline=\'middle\'>RW</text></svg>'">
+    <div class="hero-badge">Uganda 🇺🇬</div>
+  </div>
+
+  <h1 class="hero-title">
+    <span>DJ Rossi</span>
+    <span class="wine">Wine</span>
+  </h1>
+  <p class="hero-tagline">The Certified Vibe Dealer &nbsp;·&nbsp; Professional DJ &nbsp;·&nbsp; Uganda 🇺🇬</p>
+  <div class="hero-divider"></div>
+  <div class="hero-ctas">
+    <a href="#mixes" class="btn-primary">Watch Mixes</a>
+    <a href="#contact" class="btn-outline">Book Me</a>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ─── MIXES ─── -->
+<section id="mixes">
+  <div class="section-header">
+    <span class="section-label">The Sound</span>
+    <h2 class="section-title">Latest Mixes</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="mixes-tabs">
+    <button class="mix-tab active" onclick="showTab('videos', this)">🎬 Video Mixes</button>
+    <button class="mix-tab" onclick="showTab('audios', this)">🎧 Audio Mixes</button>
+  </div>
+
+  <!-- ══ VIDEO MIXES — pure HTML, click thumbnail to play ══ -->
+  <div id="tab-videos">
+    <h3 style="text-align:center;font-family:'Cinzel',serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;font-weight:700;">Latest Video Mixes</h3>
+
+    <div class="video-grid">
+
+      <!-- Video 1 -->
+      <div class="video-card">
+        <div class="video-thumb" onclick="playVideo(this, 'XnQxe6EsxMc')">
+          <img class="thumb-img" src="https://img.youtube.com/vi/XnQxe6EsxMc/hqdefault.jpg" alt="DJ Rossi Wine Latest Mix">
+          <div class="thumb-overlay">
+            <div class="play-circle">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="video-iframe-wrap"></div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">DJ Rossi Wine — Latest Mix</div>
+          <div class="video-meta">DJ Rossi Wine • YouTube</div>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="video-card">
+        <div class="video-thumb" onclick="playVideo(this, 'ujeZ8YR7TMw')">
+          <img class="thumb-img" src="https://img.youtube.com/vi/ujeZ8YR7TMw/hqdefault.jpg" alt="Afrobeats x Amapiano Mix">
+          <div class="thumb-overlay">
+            <div class="play-circle">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="video-iframe-wrap"></div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Afrobeats x Amapiano Mix</div>
+          <div class="video-meta">DJ Rossi Wine • YouTube</div>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="video-card">
+        <div class="video-thumb" onclick="playVideo(this, 'F29g24JIKEk')">
+          <img class="thumb-img" src="https://img.youtube.com/vi/F29g24JIKEk/hqdefault.jpg" alt="East Africa Vibes Mix">
+          <div class="thumb-overlay">
+            <div class="play-circle">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="video-iframe-wrap"></div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">East Africa Vibes Mix</div>
+          <div class="video-meta">DJ Rossi Wine • YouTube</div>
+        </div>
+      </div>
+
+      <!-- Video 4 -->
+      <div class="video-card">
+        <div class="video-thumb" onclick="playVideo(this, '19NWoKmbwu0')">
+          <img class="thumb-img" src="https://img.youtube.com/vi/19NWoKmbwu0/hqdefault.jpg" alt="Weekend Banger Mix">
+          <div class="thumb-overlay">
+            <div class="play-circle">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="video-iframe-wrap"></div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Weekend Banger Mix</div>
+          <div class="video-meta">DJ Rossi Wine • YouTube</div>
+        </div>
+      </div>
+
+      <!-- Video 5 -->
+      <div class="video-card">
+        <div class="video-thumb" onclick="playVideo(this, 'iOvVgx6eyNE')">
+          <img class="thumb-img" src="https://img.youtube.com/vi/iOvVgx6eyNE/hqdefault.jpg" alt="DJ Rossi Wine Live Set">
+          <div class="thumb-overlay">
+            <div class="play-circle">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="video-iframe-wrap"></div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">DJ Rossi Wine Live Set</div>
+          <div class="video-meta">DJ Rossi Wine • YouTube</div>
+        </div>
+      </div>
+
+    </div><!-- /video-grid -->
+
+    <div class="more-btn-wrap">
+      <a href="https://www.youtube.com/@DjRossiWine" target="_blank" rel="noopener" class="btn-outline">
+        ▶ &nbsp; More Video Mixes on YouTube
+      </a>
+    </div>
+  </div><!-- /tab-videos -->
+
+  <!-- ══ AUDIO MIXES — hearthis.at embeds ══ -->
+  <div id="tab-audios" style="display:none;">
+    <h3 style="text-align:center;font-family:'Cinzel',serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;font-weight:700;">Latest Audio Mixes</h3>
+
+    <div class="audio-grid">
+
+      <!-- Mix 1 -->
+      <div class="audio-card">
+        <iframe src="https://hearthis.at/dj-rossi-wine/dj-rossi-wine-edm-rnb-mixtape-new-era/embed/?hcolor=D4A017&color=f5f0e8&style=2&bgcolor=141414&waveform=1" 
+          height="150" scrolling="no" frameborder="no" allow="autoplay"></iframe>
+      </div>
+
+      <!-- Mix 2 — replace slug with actual track slugs from your profile -->
+      <div class="audio-card">
+        <iframe src="https://hearthis.at/dj-rossi-wine/embed/?hcolor=D4A017&color=f5f0e8&style=2&bgcolor=141414&waveform=1&list=2" 
+          height="150" scrolling="no" frameborder="no" allow="autoplay"></iframe>
+      </div>
+
+      <!-- Mix 3 -->
+      <div class="audio-card">
+        <iframe src="https://hearthis.at/dj-rossi-wine/embed/?hcolor=D4A017&color=f5f0e8&style=2&bgcolor=141414&waveform=1&list=3" 
+          height="150" scrolling="no" frameborder="no" allow="autoplay"></iframe>
+      </div>
+
+      <!-- Mix 4 -->
+      <div class="audio-card">
+        <iframe src="https://hearthis.at/dj-rossi-wine/embed/?hcolor=D4A017&color=f5f0e8&style=2&bgcolor=141414&waveform=1&list=4" 
+          height="150" scrolling="no" frameborder="no" allow="autoplay"></iframe>
+      </div>
+
+    </div><!-- /audio-grid -->
+
+    <!-- Full playlist embed — shows ALL tracks scrollable -->
+    <div style="max-width:900px;margin:0 auto 40px;border:1px solid rgba(212,160,23,0.2);border-radius:4px;overflow:hidden;">
+      <iframe src="https://hearthis.at/dj-rossi-wine/embed/?hcolor=D4A017&color=f5f0e8&style=2&bgcolor=0f0f0f&waveform=1" 
+        width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay"></iframe>
+    </div>
+
+    <div class="more-btn-wrap">
+      <a href="https://hearthis.at/dj-rossi-wine/" target="_blank" rel="noopener" class="btn-outline">
+        🎧 &nbsp; Listen to All 44 Audio Mixes on HearThis
+      </a>
+    </div>
+  </div><!-- /tab-audios -->
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-label">The Artist</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="about-inner">
+    <div class="about-art">
+      <div class="about-ring-1"><div class="about-dot"></div></div>
+      <div class="about-ring-2"></div>
+      <img class="about-logo-main" src="IMAGES/Screenshot_20260519-130945.png" alt="DJ Rossi Wine Logo"
+        onerror="this.src='https://yt3.googleusercontent.com/ytc/APkrFKYN1vQ9AxxO6R-VNL7U7YMH8_MOBFgjTXMLpW7qiw=s900-c-k-c0x00ffffff-no-rj'">
+    </div>
+
+    <div class="about-content">
+      <h3 class="about-name">DJ Rossi Wine</h3>
+      <div class="about-bio">
+        <p>DJ Rossi Wine is one of Uganda's most electrifying and talented disc jockeys, known for his seamless blends, crowd-reading mastery, and ability to keep any dance floor on fire from start to finish.</p>
+        <p>Born and raised in Uganda, Rossi Wine has carved out a distinct sonic identity that fuses Afrobeats, Amapiano, Dancehall, Hip-Hop, R&amp;B, and the rich sounds of East Africa into explosive mixes that resonate across the continent and beyond.</p>
+        <p>With years of experience performing at top clubs, corporate events, concerts, and private parties, DJ Rossi Wine has built a reputation as a professional whose sets leave audiences wanting more — every single time.</p>
+        <p><em style="color:var(--gold);">"The music doesn't stop. The vibe never dies."</em></p>
+      </div>
+
+      <div class="about-stats">
+        <div class="stat-item">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Years Active</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Events</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">UG🇺🇬</span>
+          <span class="stat-label">Based In</span>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a href="#contact" class="btn-primary">Book DJ Rossi Wine</a>
+        <a href="#mixes" class="btn-outline">Hear The Mixes</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section id="gallery">
+  <div class="section-header">
+    <span class="section-label">The Moments</span>
+    <h2 class="section-title">Gallery</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="gallery-placeholder">
+    <div class="gallery-ph-item tall">
+      <img src="IMAGES/WhatsApp Image 2026-05-19 at 03.28.24 (1).jpeg" alt="rossi wine">
+    </div>
+    <div class="gallery-ph-item tall">
+      <img src="IMAGES/WhatsApp Image 2026-05-19 at 03.29.44.jpeg" alt="DJ Setup">
+    </div>
+    <div class="gallery-ph-item short">
+      <img src="IMAGES/WhatsApp Image 2026-05-20 at 04.14.15.jpeg" alt="on decks">
+    </div>
+    <div class="gallery-ph-item short">
+      <img src="IMAGES/WhatsApp Image 2026-05-20 at 04.14.29.jpeg" alt="Rossi wine">
+    </div>
+    <div class="gallery-ph-item tall">
+      <img src="IMAGES/crowd vibing.jpg" alt="crowd vibing">
+    </div>
+  </div>
+
+  <div class="gallery-upload-note">
+    <p>📌 <strong style="color:var(--gold);">To add your photos:</strong> Send your images to your web developer and they'll be added here.</p>
+    <p style="margin-top:6px;font-size:12px;">Or connect with us via <a href="#contact">the contact form below</a>.</p>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-label">Get In Touch</span>
+    <h2 class="section-title">Contact &amp; Booking</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="contact-block">
+        <h4>Connect With Me</h4>
+        <p>Follow DJ Rossi Wine across all platforms for the latest mixes, events, and updates.</p>
+      </div>
+
+      <div class="social-links">
+        <a href="https://www.tiktok.com/@djrossiwine?" target="_blank" rel="noopener" class="social-link">
+          <svg class="social-icon" viewBox="0 0 24 24" style="fill:#FFD700;filter:drop-shadow(0 0 6px rgba(255,215,0,0.7));flex-shrink:0;"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+          <span style="color:#f5f0e8;font-weight:500;">TikTok &nbsp;<span style="color:#FFD700;">@djrossiwine</span></span>
+        </a>
+        <a href="https://wa.me/256751765358" target="_blank" rel="noopener" class="social-link">
+          <svg class="social-icon" viewBox="0 0 24 24" style="fill:#25D366;filter:drop-shadow(0 0 6px rgba(37,211,102,0.7));flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span style="color:#f5f0e8;font-weight:500;">WhatsApp &nbsp;<span style="color:#25D366;">+256 751 765 358</span></span>
+        </a>
+        <a href="https://www.instagram.com/djrossiwine3?" target="_blank" rel="noopener" class="social-link">
+          <svg class="social-icon" viewBox="0 0 24 24" style="fill:url(#igGrad);flex-shrink:0;filter:drop-shadow(0 0 6px rgba(225,48,108,0.6));">
+            <defs>
+              <linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#f09433"/><stop offset="25%" style="stop-color:#e6683c"/>
+                <stop offset="50%" style="stop-color:#dc2743"/><stop offset="75%" style="stop-color:#cc2366"/>
+                <stop offset="100%" style="stop-color:#bc1888"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+          <span style="color:#f5f0e8;font-weight:500;">Instagram &nbsp;<span style="color:#e1306c;">@djrossiwine3</span></span>
+        </a>
+        <a href="https://www.facebook.com/djrossiwine" target="_blank" rel="noopener" class="social-link">
+          <svg class="social-icon" viewBox="0 0 24 24" style="fill:#1877F2;filter:drop-shadow(0 0 6px rgba(24,119,242,0.7));flex-shrink:0;"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span style="color:#f5f0e8;font-weight:500;">Facebook &nbsp;<span style="color:#1877F2;">DJ Rossi Wine</span></span>
+        </a>
+        <a href="https://youtube.com/@djrossiwine?si=aHeEId34s5pg9C" target="_blank" rel="noopener" class="social-link">
+          <svg class="social-icon" viewBox="0 0 24 24" style="fill:#FF0000;filter:drop-shadow(0 0 6px rgba(255,0,0,0.7));flex-shrink:0;"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          <span style="color:#f5f0e8;font-weight:500;">YouTube &nbsp;<span style="color:#FF0000;">@djrossiwine</span></span>
+        </a>
+        <a href="https://hearthis.at/dj-rossi-wine/" target="_blank" rel="noopener" class="social-link">
+          <svg class="social-icon" viewBox="0 0 24 24" style="fill:#FFD700;filter:drop-shadow(0 0 6px rgba(255,215,0,0.6));flex-shrink:0;"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4a8 8 0 110 16A8 8 0 0112 4zm0 3a5 5 0 100 10A5 5 0 0012 7zm0 2a3 3 0 110 6 3 3 0 010-6zm0 1a2 2 0 100 4 2 2 0 000-4z"/></svg>
+          <span style="color:#f5f0e8;font-weight:500;">HearThis &nbsp;<span style="color:#FFD700;">dj-rossi-wine</span></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="booking-form">
+      <h3>Book DJ Rossi Wine</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Fill in the form and I'll get back to you within 24 hours.</p>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="John Doe">
+      </div>
+      <div class="form-group">
+        <label>Email / WhatsApp</label>
+        <input type="text" placeholder="+256 7XX XXX XXX">
+      </div>
+      <div class="form-group">
+        <label>Event Type</label>
+        <select>
+          <option value="">Select event type…</option>
+          <option>Club Night</option>
+          <option>Wedding</option>
+          <option>Corporate Event</option>
+          <option>Private Party</option>
+          <option>Concert / Festival</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Event Date</label>
+        <input type="date">
+      </div>
+      <div class="form-group">
+        <label>Message / Details</label>
+        <textarea placeholder="Tell me about your event…"></textarea>
+      </div>
+      <div class="form-submit">
+        <button class="btn-primary" style="width:100%;font-size:11px;" onclick="handleBooking()">
+          Send Booking Request
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="https://yt3.googleusercontent.com/ytc/APkrFKYN1vQ9AxxO6R-VNL7U7YMH8_MOBFgjTXMLpW7qiw=s900-c-k-c0x00ffffff-no-rj" alt="DJ Rossi Wine">
+      <h4>DJ Rossi Wine</h4>
+      <p>Uganda's premier DJ setting stages on fire across East Africa and beyond. Every event. Every night. Pure fire.</p>
+      <div class="footer-socials">
+        <a href="https://www.tiktok.com/@djrossiwine?" target="_blank" class="footer-social-btn" aria-label="TikTok" style="border-color:rgba(255,215,0,0.4);">
+          <svg viewBox="0 0 24 24" style="fill:#FFD700;filter:drop-shadow(0 0 4px rgba(255,215,0,0.6));"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+        </a>
+        <a href="https://wa.me/256751765358" target="_blank" class="footer-social-btn" aria-label="WhatsApp" style="border-color:rgba(37,211,102,0.4);">
+          <svg viewBox="0 0 24 24" style="fill:#25D366;filter:drop-shadow(0 0 4px rgba(37,211,102,0.6));"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/djrossiwine3?" target="_blank" class="footer-social-btn" aria-label="Instagram" style="border-color:rgba(225,48,108,0.4);">
+          <svg viewBox="0 0 24 24" style="fill:#e1306c;filter:drop-shadow(0 0 4px rgba(225,48,108,0.6));"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/djrossiwine" target="_blank" class="footer-social-btn" aria-label="Facebook" style="border-color:rgba(24,119,242,0.4);">
+          <svg viewBox="0 0 24 24" style="fill:#1877F2;filter:drop-shadow(0 0 4px rgba(24,119,242,0.6));"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://youtube.com/@djrossiwine?si=aHeEId34s5pg9C" target="_blank" class="footer-social-btn" aria-label="YouTube" style="border-color:rgba(255,0,0,0.4);">
+          <svg viewBox="0 0 24 24" style="fill:#FF0000;filter:drop-shadow(0 0 4px rgba(255,0,0,0.6));"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#mixes">Video Mixes</a></li>
+        <li><a href="#mixes">Audio Mixes</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Platforms</h5>
+      <ul>
+        <li><a href="https://www.youtube.com/@DjRossiWine" target="_blank">YouTube</a></li>
+        <li><a href="https://hearthis.at/dj-rossi-wine/" target="_blank">HearThis.at</a></li>
+        <li><a href="https://www.tiktok.com/@djrossiwine" target="_blank">TikTok</a></li>
+        <li><a href="https://www.instagram.com/djrossiwine" target="_blank">Instagram</a></li>
+        <li><a href="https://www.facebook.com/djrossiwine" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 DJ Rossi Wine. All rights reserved.</span>
+    <span class="footer-made">Uganda's Finest · Setting The Vibe</span>
+  </div>
+</footer>
+
+<script>
+// ── PARTICLES ──
+(function(){
+  const c = document.getElementById('particles');
+  for(let i=0;i<30;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=Math.random()*4+2;
+    p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:-${Math.random()*20}s;`;
+    c.appendChild(p);
+  }
+})();
+
+// ── NAVBAR SCROLL ──
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.classList.toggle('scrolled',window.scrollY>60);
+  const sections=['home','mixes','about','gallery','contact'];
+  const links=document.querySelectorAll('.nav-links a');
+  let current='home';
+  sections.forEach(s=>{
+    const el=document.getElementById(s);
+    if(el&&window.scrollY>=el.offsetTop-120) current=s;
+  });
+  links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+current));
+});
+
+// ── MOBILE MENU ──
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ── TABS ──
+function showTab(tab,btn){
+  document.getElementById('tab-videos').style.display=tab==='videos'?'block':'none';
+  document.getElementById('tab-audios').style.display=tab==='audios'?'block':'none';
+  document.querySelectorAll('.mix-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── CLICK-TO-PLAY VIDEO ──
+// When user clicks a thumbnail, swap it out for the real iframe with autoplay
+function playVideo(thumbEl, videoId){
+  const iframeWrap = thumbEl.querySelector('.video-iframe-wrap');
+  const thumbImg   = thumbEl.querySelector('.thumb-img');
+  const overlay    = thumbEl.querySelector('.thumb-overlay');
+
+  // Build the iframe
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  iframe.allowFullscreen = true;
+  iframe.frameBorder = '0';
+
+  // Show iframe, hide thumbnail + overlay
+  iframeWrap.appendChild(iframe);
+  iframeWrap.style.display = 'block';
+  thumbImg.style.display = 'none';
+  overlay.style.display = 'none';
+
+  // Disable the click handler so it doesn't fire again
+  thumbEl.onclick = null;
+  thumbEl.style.cursor = 'default';
+}
+
+// ── BOOKING FORM ──
+function handleBooking(){
+  const btn=event.currentTarget;
+  const orig=btn.textContent;
+  btn.textContent='✓ Request Sent!';
+  btn.style.background='linear-gradient(135deg,#1a5c1a,#2d8c2d)';
+  setTimeout(()=>{ btn.textContent=orig; btn.style.background=''; },4000);
+}
+</script>
+</body>
+</html>
